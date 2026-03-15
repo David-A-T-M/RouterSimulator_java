@@ -21,6 +21,9 @@ class IpAddressTest {
   @Test
   void constructor_throwsOnInvalidRange() {
     assertThrows(IllegalArgumentException.class, () -> new IpAddress(256, 0));
+    assertThrows(IllegalArgumentException.class, () -> new IpAddress(-1, 0));
+
+    assertThrows(IllegalArgumentException.class, () -> new IpAddress(0, 256));
     assertThrows(IllegalArgumentException.class, () -> new IpAddress(0, -1));
   }
 
