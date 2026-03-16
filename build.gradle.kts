@@ -17,6 +17,11 @@ checkstyle {
     configProperties = mapOf("org.checkstyle.google.suppressionfilter.config" to "")
 }
 
+tasks.check {
+    dependsOn(tasks.named("checkstyleMain"))
+    dependsOn(tasks.named("checkstyleTest"))
+}
+
 spotless {
     java {
 
