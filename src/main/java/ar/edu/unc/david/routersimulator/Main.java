@@ -7,13 +7,5 @@ package ar.edu.unc.david.routersimulator;
 public class Main {
 
   /** Entry point of the application. */
-  public static void main(String[] args) {
-
-    System.out.println("Hello and welcome!");
-
-    for (int i = 1; i <= 5; i++) {
-
-      System.out.println("i = " + i);
-    }
-  }
+  public static void main(String[] args) {}
 }

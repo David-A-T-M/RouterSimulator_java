@@ -3,6 +3,7 @@ plugins {
     id("application")
     id("checkstyle")
     id("com.diffplug.spotless") version "6.25.0"
+    id("jacoco")
 }
 
 application {
@@ -27,6 +28,24 @@ spotless {
 
         target("src/**/*.java")
     }
+}
+
+jacoco {
+    toolVersion = "0.8.11" // Versión estable para Java 21+
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    classDirectories.setFrom(files(classDirectories.files.map {
+        fileTree(it) {
+            exclude("ar/edu/unc/david/routersimulator/Main*")
+        }
+    }))
 }
 
 group = "ar.edu.unc.david.routersimulator"
