@@ -120,6 +120,20 @@ class PageReassemblerTest {
     assertFalse(reassembler.addPacket(p));
   }
 
+  @Test
+  void hasPacketAt_returnsFalseForInvalidSlot() {
+    assertFalse(reassembler.hasPacketAt(0));
+    assertThrows(IndexOutOfBoundsException.class, () -> reassembler.hasPacketAt(-1));
+    assertThrows(IndexOutOfBoundsException.class, () -> reassembler.hasPacketAt(TOTAL));
+  }
+
+  @Test
+  void hasPacketAt_returnsTrueForValidSlot() {
+    var p = Packet.create(PAGE_ID, 0, TOTAL, SRC, DST, 0L);
+    assertTrue(reassembler.addPacket(p));
+    assertTrue(reassembler.hasPacketAt(0));
+  }
+
   // =============== isComplete / completionRate ===============
 
   @Test
@@ -170,6 +184,12 @@ class PageReassemblerTest {
   void equals_basedOnlyOnPageId() {
     var other = new PageReassembler(PAGE_ID, new IpAddress(9, 9), 5, 999L);
     assertEquals(reassembler, other);
+  }
+
+  @Test
+  void equals_differentPageIdsNotEqual() {
+    var other = new PageReassembler(999L, SRC, TOTAL, 0L);
+    assertNotEquals(reassembler, other);
   }
 
   // =============== hashCode ===============
