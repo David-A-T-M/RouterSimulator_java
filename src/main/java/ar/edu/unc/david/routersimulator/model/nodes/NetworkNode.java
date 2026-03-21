@@ -1,7 +1,9 @@
 package ar.edu.unc.david.routersimulator.model.nodes;
 
 import ar.edu.unc.david.routersimulator.model.IpAddress;
+import ar.edu.unc.david.routersimulator.model.stats.RouterStats;
 import ar.edu.unc.david.routersimulator.model.stats.Stats;
+import ar.edu.unc.david.routersimulator.model.stats.TerminalStats;
 
 /**
  * A node in the simulated network — either a {@link Router} or a {@link Terminal}.
